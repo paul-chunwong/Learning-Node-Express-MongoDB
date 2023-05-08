@@ -10,7 +10,7 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
 const Product = require('./models/productModel')
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json())
 
