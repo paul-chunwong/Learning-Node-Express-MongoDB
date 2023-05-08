@@ -10,16 +10,17 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose');
 const Product = require('./models/productModel')
+const PORT = 3000;
 
 app.use(express.json())
 
-// MongoDB database connection + node.js starts at port 3000
+// MongoDB database connection + node.js starts at PORT 3000
 mongoose
     .connect('mongodb+srv://admin:0306@cluster0.6bxg1zu.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
         console.log('connected to MongoDB')
-        app.listen(3000, () => {
-            console.log("Node API App is running on port 3000")
+        app.listen(PORT, () => {
+            console.log("Node API App is running on PORT 3000")
         })
     }).catch((error) => {
         console.log(error)
