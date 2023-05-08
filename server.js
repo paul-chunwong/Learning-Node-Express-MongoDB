@@ -48,7 +48,7 @@ app.get('/products', async (req, res) => {
 // GET: Fetch specified Product data from MongoDB database
 app.get('/products/:id', async (req, res) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const product = await Product.findById(id);
         res.status(200).json(product);
     } catch (error) {
@@ -67,5 +67,21 @@ app.post('/products', async (req, res) => {
     } catch (error) {
         console.log(error.message);
         res.status(500).json({ message: error.message })
+    }
+})
+
+// PUT: Update a Product in MongoDB database
+app.put('/products/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const product = await Product.findByIdAndUpdate(id, req.body);
+        // we cannot find any product in database
+        if(!product){
+            return res.status(404).json({message: `cannot find any product with ID ${id}`})
+        }
+        const updatedProduct = await Product.findById(id);
+        res.status(200).json(updatedProduct);
+    } catch {
+
     }
 })
